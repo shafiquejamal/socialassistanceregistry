@@ -1,0 +1,82 @@
+{% load i18n %}
+<table class="package_list">
+		{% include "applicants/applicant_heading1_snippet.html" %}
+		<tr>
+			<td>{{ form.bank_card_number }}{% if form.errors.bank_card_number %}{{ form.errors.bank_card_number }}{% endif %}</td>
+			<td>{{ form.site_of_interview }}{% if form.errors.site_of_interview %}{{ form.errors.site_of_interview }}{% endif %}</td>
+			<td>{{ form.housenumber }}{% if form.errors.housenumber %}{{ form.errors.housenumber }}{% endif %}</td>
+			<td>{{ form.address_line1 }}{% if form.errors.address_line1 %}{{ form.errors.address_line1 }}{% endif %}</td>
+			<td>{{ form.address_line2 }}{% if form.errors.address_line2 %}{{ form.errors.address_line2 }}{% endif %}</td>
+		</tr>
+	</table>
+	<table class="package_list">
+		{% include "applicants/applicant_heading2_snippet.html" %}
+		<tr>
+			<td>{{ form.municipality }}{% if form.errors.municipality %}{{ form.errors.municipality }}{% endif %}</td>
+			<td>{{ form.district }}{% if form.errors.district %}{{ form.errors.district }}{% endif %}</td>
+			<td>{{ form.urban }}{% if form.errors.urban %}{{ form.errors.urban }}{% endif %}</td>
+			<td>{{ form.postal }}{% if form.errors.postal %}{{ form.errors.postal }}{% endif %}</td>
+			
+		</tr>
+	</table>
+	<table class="package_list">
+		{% include "applicants/applicant_heading3_snippet.html" %}
+		<tr>
+			<td>{{ form.home_phone }}{% if form.errors.home_phone %}{{ form.errors.home_phone }}{% endif %}</td>
+			<td>{{ form.mobile_phone }}{% if form.errors.mobile_phone %}{{ form.errors.mobile_phone }}{% endif %}</td>
+			<td>{{ form.dwelling_type }}{% if form.errors.dwelling_type %}{{ form.errors.dwelling_type }}{% endif %}</td>
+			<td>{{ form.rooms }}{% if form.errors.rooms %}{{ form.errors.rooms }}{% endif %}</td>
+			<td>{{ form.condition }}{% if form.errors.condition %}{{ form.errors.condition }}{% endif %}</td>
+		</tr>
+	</table>
+	<table class="package_list">
+		{% include "applicants/applicant_heading4_snippet.html" %}
+		<tr>
+			<td>{{ form.gas_for_lighting }}{% if form.errors.gas_for_lighting %}{{ form.errors.gas_for_lighting }}{% endif %}</td>
+			<td>{{ form.gas_for_heating }}{% if form.errors.gas_for_heating %}{{ form.errors.gas_for_heating }}{% endif %}</td>
+			<td>{{ form.gas_for_cooking }}{% if form.errors.gas_for_cooking %}{{ form.errors.gas_for_cooking }}{% endif %}</td>
+			<td>{{ form.gas_for_other }}{% if form.errors.gas_for_other %}{{ form.errors.gas_for_other }}{% endif %}</td>
+		</tr>
+	</table>
+		<table class="package_list">
+		{% include "applicants/applicant_heading5_snippet.html" %}
+		<tr>
+			<td>{{ form.a_color_tv }}{% if form.errors.a_color_tv %}{{ form.errors.a_color_tv }}{% endif %}</td>
+			<td>{{ form.a_washing_machine }}{% if form.errors.a_washing_machine %}{{ form.errors.a_washing_machine }}{% endif %}</td>
+			<td>{{ form.q_cows }}{% if form.errors.q_cows %}{{ form.errors.q_cows }}{% endif %}</td>
+			<td>{{ form.q_pigs }}{% if form.errors.q_pigs %}{{ form.errors.q_pigs }}{% endif %}</td>
+		</tr>
+	</table>
+	</table>
+		<table class="package_list">
+		{% include "applicants/applicant_heading6_snippet.html" %}
+		<tr>
+			<td>{{ form.sp_ne_amount }}{% if form.errors.sp_ne_amount %}{{ form.errors.sp_ne_amount }}{% endif %}</td>
+			<td>{{ form.sp_ne_months }}{% if form.errors.sp_ne_months %}{{ form.errors.sp_ne_months }}{% endif %}</td>
+			<td>{{ form.sp_ne_last12m }}{% if form.errors.sp_ne_last12m %}{{ form.errors.sp_ne_last12m }}{% endif %}</td>
+		</tr>
+	</table>
+	</table>
+		<table class="package_list">
+		{% include "applicants/applicant_heading7_snippet.html" %}
+		<tr>
+			<td>{{ form.sp_dp_amount }}{% if form.errors.sp_dp_amount %}{{ form.errors.sp_dp_amount }}{% endif %}</td>
+			<td>{{ form.sp_dp_months }}{% if form.errors.sp_dp_months %}{{ form.errors.sp_dp_months }}{% endif %}</td>
+			<td>{{ form.sp_dp_last12m }}{% if form.errors.sp_dp_last12m %}{{ form.errors.sp_dp_last12m }}{% endif %}</td>
+		</tr>
+	</table>
+	</table>
+		<table class="package_list">
+		{% include "applicants/applicant_heading8_snippet.html" %}
+		<tr>
+			<td>{{ form.oi_remit }}{% if form.errors.oi_remit %}{{ form.errors.oi_remit }}{% endif %}</td>
+			<td>{{ form.oi_rent }}{% if form.errors.oi_rent %}{{ form.errors.oi_rent }}{% endif %}</td>
+		</tr>
+	</table>
+	</table>
+		<table class="package_list">
+		{% include "applicants/applicant_heading9_snippet.html" %}
+		<tr>
+			<td>{{ form.tell_me }}{% if form.errors.tell_me %}{{ form.errors.tell_me }}{% endif %}</td>
+		</tr>
+	</table>

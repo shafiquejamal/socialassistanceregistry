@@ -1,0 +1,66 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load humanize %}
+
+{% block content_title %}<h1>{% trans 'My Applicant' %}</h1>{% endblock %}
+
+{% block content %}
+
+	<div class="clearfix package_detail">
+	{% for f in applicant.get_all_fields %}
+		<div id="applicant_qr_{{ forloop.counter }}" class="grid_8">
+    		<div id="applicant_q_{{ forloop.counter }}" >
+    			{{f.label|capfirst}}
+    		</div>
+    		<div id="applicant_r_{{ forloop.counter }}" >
+    			{{f.value|escape|urlize}}
+    	 	</div>
+    	 </div>
+	{% endfor %}
+	</div>
+
+{% if applicant.householdmember_set.all %}
+<h2>Household members</h2>
+<table class="package_detail">
+	<tr>
+		{% include "applicants/householdmember_heading_snippet.html" %}
+	</tr>
+	
+	{% for householdmember in applicant.householdmember_set.all %}
+	<tr>
+		<td>{{ householdmember.first_name }}</td>
+		<td>{{ householdmember.middle_name  }}</td>
+		<td>{{ householdmember.last_name  }}</td>
+		<td>{{ householdmember.national_id  }}</td>
+		<td>{{ householdmember.get_male_display }}</td>
+		<td>{{ householdmember.date_of_birth }}</td>
+		<td>{{ householdmember.get_rel_to_head_display }}</td>
+		<td>{{ householdmember.get_disability_display }}</td>
+	</tr>
+	{% endfor %}
+</table>
+	<p>*Does [NAME] suffer from a chronic illness or disability that has lasted more than 3 months? For example: congenital abnormalities; nervous system and sense organ diseases; mental disorder; diseases of respiratory organs (such as asthma); and diseases of blood and blood producing organs.</p>
+	{% else %}
+		{% trans 'No householdmembers in this applicant.' %}<br/><br/>
+	{% endif %}
+	{% ifequal user.username applicant.user.username %}
+	<table>
+	<tr>
+	<form action="{% url 'applicants:update' applicant.pk_masked %}">{% csrf_token %}
+	<input class="button" type="submit" value="Edit Householdmembers"/>
+	</form>	
+	</tr>
+	<tr>
+	<form action="{% url 'applicants:update_applicant' applicant.pk_masked %}">{% csrf_token %}
+	<input class="button" type="submit" value="Edit Applicant" />
+	</form>
+	</tr>
+	<tr>
+	<form action="{% url 'applicants:delete' applicant.pk_masked %}">{% csrf_token %}
+	<input class="button delete" type="submit" value="Delete Applicant" />
+	</form>
+	</tr>
+	</table>
+	{% endifequal %}
+{% endblock %}

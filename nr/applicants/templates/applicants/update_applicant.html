@@ -1,0 +1,27 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load humanize %}
+
+{% block content_title %}<h1>{% trans 'Update Applicant' %}</h1>{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'applicants:update_applicant' pk_masked %}" method="post" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>{% csrf_token %}
+	<!-- {% include 'applicants/create_edit_applicant_snippet.html' %} -->
+	{% for field in form %}
+		<div id="applicant_qr_{{ forloop.counter }}" class="grid_8">
+			<div id="applicant_q_{{ forloop.counter }}" >
+				{{ field.label_tag }}{{ field.errors }}	
+			</div>
+			<div id="applicant_r_{{ forloop.counter }}" >
+				{{ field }}
+			</div>
+		</div>
+	{% endfor %}
+	<div class="grid_24">
+		<input type="submit" value="Next >" />
+	</div>
+</form>
+
+{% endblock %}

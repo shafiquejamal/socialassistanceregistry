@@ -1,0 +1,10 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Too many packages registered in the last 24 hours" %}{% endblock %}
+
+{% block content_title %}<h2>{% trans "You have exceeded your limit for registering new packages" %}.</h2>{% endblock %}
+
+{% block content %}
+<p>{% blocktrans %}You have exceeded your limit for registering new packages: please limit yourself to {{ PKGS_MAX_PACKAGES_REGISTER_PER_X_HOURS }} packages in {{ PKGS_X_HOURS }} hours. Thank you.{% endblocktrans %}</p>
+{% endblock %}

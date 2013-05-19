@@ -14,8 +14,8 @@ AUTHENTICATION_BACKENDS = (
 ANONYMOUS_USER_ID = -1 
  
 AUTH_PROFILE_MODULE = 'accounts.MyProfile'  
-LOGIN_REDIRECT_URL = '/'
-USERENA_SIGNIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/applicants/'
+USERENA_SIGNIN_REDIRECT_URL = '/applicants/'
 LOGIN_URL = '/accounts/signin/'  
 LOGOUT_URL = '/accounts/signout/'  
 USERENA_DEFAULT_PRIVACY = 'closed'
@@ -32,8 +32,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
  
 # -------------------------------- end For userena ------------------------------------
   
+APPLICANTS_EXTRA_HOUSEHOLDMEMBER_FIELD = 10
+
  
-DEFAULT_FROM_EMAIL = 'some@email.com'
+DEFAULT_FROM_EMAIL = 'admin@socialassistanceregistry.com'
  
 def get_env_variable(var_name):
     ''' Get the environment variable or return exception '''
@@ -67,6 +69,17 @@ DATABASES = {
     }
 }
 
+
+DATABASES['default']['ENGINE']   = get_env_variable('databases_default_engine')
+DATABASES['default']['NAME']     = get_env_variable('databases_default_name')
+DATABASES['default']['USER']     = get_env_variable('databases_default_user')
+DATABASES['default']['PASSWORD'] = get_env_variable('databases_default_password')
+DATABASES['default']['HOST']     = get_env_variable('databases_default_host')
+DATABASES['default']['PORT']     = get_env_variable('databases_default_port')
+EMAIL_HOST = get_env_variable('email_host')
+EMAIL_HOST_USER = get_env_variable('email_host_user')
+EMAIL_HOST_PASSWORD = get_env_variable('email_host_password')
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -90,6 +103,8 @@ USE_I18N = True
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
 USE_L10N = True
+#USE_L10N = False
+#DATE_FORMAT = "m/d/Y"
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
@@ -182,6 +197,7 @@ INSTALLED_APPS = (
     'guardian',
     'easy_thumbnails',
     'accounts',
+    'applicants',
 )
 
 # A sample logging configuration. The only tangible logging

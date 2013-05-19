@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% load url from future %}
+{% load humanize %}
+
+{% block content_title %}<h1>{% trans 'Contact Us' %}</h1>{% endblock %}
+
+{% block content %}
+<div class="grid_24">
+<div class="grid_12 leftupperbox alpha">
+	<h2>{% trans 'About this site' %}</h2>
+	<ul>
+	<li>{% trans 'This is a demo of a national registry, which could be for social protection or programs. If you would like to have the code, please email me: shafique.jamal@gmail.com. I hope to one day put all the code on Github.com' %}</li>
+    <li>{% trans "This site is implemented in Python using the Django (1.5) framework" %}</li>
+    <li>{% trans "It easily supports multiple languages" %}</li>
+    <li>{% trans "It keeps track of changes to social assistance applications" %}</li>
+	</ul>
+</div>
+<div class="grid_12 rightupperbox omega">
+	<h2>{% trans 'How to use this site' %}</h2>
+    <ul>
+    <li>{% trans 'Register as a social administrator by filling the form below or clicking register (top right) and filling the form that is then presented' %}</li>
+    <li>{% trans 'After you register, click on "Registry Applications" in the top right menu to view applications (details and index), enter applicaitons, edit applications, and maybe more. Note: you can only edit applications that you have entered, not applications that others have entered. But you can view all applications in the system.' %}</li>
+    </ul>
+</div>
+</div>
+<div class="grid_24">
+<div class="grid_12 leftlowerbox alpha">
+	<h2>{% trans 'Why I did this?' %}</h2>
+    <ul>
+    <li>{% trans 'I wanted to understand how long it would take and what would be involved in getting a basic national registry website up and running. Turns out a minimal implementation is fast and simple.' %}</li>
+    </ul>
+</div>
+<div class="grid_12 omega">
+</div>
+<div class="grid_12 rightlowerbox alpha">
+    <h2>{% trans 'Please give me some feedback.' %}</h2>
+    <ul>
+    <li>{% trans 'Please send comments, questions, etc. to shafique.jamal@gmail.com' %}</li>
+    </ul>
+</div>	
+</div>
+{% if not user.is_authenticated %}
+{% include 'register_snippet.html' %}
+{% endif %}
+{% endblock %}

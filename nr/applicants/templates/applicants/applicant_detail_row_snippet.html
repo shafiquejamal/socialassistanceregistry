@@ -1,0 +1,14 @@
+{% load i18n %}
+{% load url from future %}
+{% load humanize %}
+<tr>
+		<td><a href="{% url 'applicants:detail' applicant.pk_masked %}">{{ applicant.pk_masked }}</a></td>
+		<td>{{ applicant.housenumber }}</td>
+		<td>{{ applicant.address_line1 }}</td>
+		<td>{{ applicant.postal}}</td>
+		<td>{{ applicant.mobile_phone }}</td>
+		<td>{{ applicant.user}}</td>
+		<td>{{ applicant.hhsize}}</td>
+		<td>{{ applicant.score}}</td>
+		<td>{{ applicant.created_at|naturaltime}}</td>
+	</tr>
