@@ -5,6 +5,8 @@ Basic application intake software for social assistance programs. Allows you cre
 
 Feel free to check out the demo site: http://socialassistanceregistry.com
 
+There is also a demo video available: https://www.youtube.com/watch?v=cou0e1HkKhI
+
 Installation Instructions
 =========================
 
