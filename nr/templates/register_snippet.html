@@ -1,6 +1,6 @@
 {% load i18n %}
-{% load label_with_classes %}
-<!-- http://stackoverflow.com/questions/414679/add-class-to-django-label-tag-output -->
+{% load widget_tweaks %}
+<!-- https://pypi.python.org/pypi/django-widget-tweaks -->
 <div class="grid_24">
 <form class="userena" action="{% url 'userena_signup' %}" method="post">
   {% csrf_token %}
@@ -16,7 +16,7 @@
         {% else %}
             <p>
             {{ field.label_tag }} 
-            {{ field|label_with_classes:"class1 class2" }}
+            {{ field|add_class:"span4" }}
             </p>
         {% endif %}
     {% endfor %}
