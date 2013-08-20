@@ -9,65 +9,147 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="stylesheet" href="{% static "css/style.css" %}">
+  <link rel="stylesheet" href="{% static "css/bootstrap/css/bootstrap.css" %}">
+  <link rel="stylesheet" href="{% static "css/bootstrap/css/bootstrap-responsive.min.css" %}">
   <title>{% block title %}{{ site.domain }}{% endblock %}</title>
   {% block meta %}{% endblock %}
   {% block extrahead %}{% endblock %}
 </head>
 <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
-  
-  <div class="wrap container_24">
-    <header class="clearfix"> 
-      <div id="logo" class="grid_10">
-        <h1>Socialassistanceregistry.com</h1>
-        <h2>{% trans 'Application intake software' %}</h2>
-        <h3>{% trans '(for social assistance programs, but could be used for other programs)' %}</h3>
-        <p class="fineprint">{% trans 'download the code:' %}<a href="https://github.com/shafiquejamal/socialassistanceregistry.git">https://github.com/shafiquejamal/socialassistanceregistry.git</a></p>
-      </div>
-      <div class="grid_12">
-        <div id="loginbox" class="grid_14">
-          <ul>
-            <li><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
-          {% if user.is_authenticated %}
-            <li><a href="{% url 'applicants:index' %}">{% trans 'Registry Applications' %}</a></li>
-            <li><a href="{% url 'userena_profile_detail' user.username %}">{% trans 'Profile' %}</a></li>
-            <li><a href="{% url "contact" %}" title="Contact">{% trans 'Contact' %}</a></li>
-            <li><a href="{% url "userena_signout" %}" title="Logout">{% trans 'Logout' %}</a></li>
-          {% else %}
-            <li><a href="{% url "userena_signin" %}" title="Signup">{% trans "Login" %}</a></li>
-            <li><a href="{% url "userena_signup" %}" title="Register">{% trans "Register" %}</a></li>
-          {% endif %}
-          <li><a href="{% url "faq" %}" title="FAQ">{% trans "FAQ" %}</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
-  
-    {% if user.is_authenticated %}
-    <nav class="grid_24">
-      <ul>
-      {% ifregex "^/.*/accounts/" request.path %}
-        <li><a href="{% url 'userena_profile_detail' user.username %}">{% trans 'My profile' %}</a></li>
-        <li><a href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit profile" %}</a></li>
-        <li><a href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a></li>
-        <li><a href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a></li>
-        <li><a href="{% url 'userena_profile_list' %}">{% trans "View Profiles" %}</a></li>
-      {% endifregex %}
-      {% ifregex "^/.*/applicants/" request.path %}
-        <li><a href="{% url 'applicants:index' %}">{% trans 'List of applicants' %}</a></li>
-        <li><a href="{% url 'applicants:create' %}">{% trans 'New applicant' %}</a></li>
-        <li><a href="{% url 'applicants:download_all' %}">{% trans 'Download applicant data' %}</a></li>
-      {% endifregex %}
-      </ul>
-    </nav>
-    {% endif %}
 
-    <div class="main clearfix">
-        {% block content %}{% endblock %}
-    </div>
-
-    <footer class="grid_24">
-        <p>{% trans "Copyright (c) 2013 Domain.com. All right reserved." %} <a href="{% url 'termsandconditions' %}">{% trans "Website Terms of Use and Service Terms and Conditions" %}</a>.</p>
-    </footer>
-  </div>
+	<div id="wrapper">
+		<div id="header_holder">
+			<div id="header">
+				<div id="header_left" class="pull-left">
+					<h1 class="pull-left"> Socialassistanceregisrty.com</h1>
+					{% block subtitle %}
+					<h4>{% trans 'Application intake software' %}</h4>{% endblock %}
+					<div class="clearfix"></div>
+				</div>
+				
+				{% if user.is_authenticated %}
+				<div id="header_right" class="pull-right">
+				{% else %}
+				<div id="login" class="pull-right">
+				{% endif %}
+					{% block right_header %}
+					{% if user.is_authenticated %}
+						<ul class="inline">
+							<li class="">
+								<a href="#"><i class="icon-question-sign"></i> FAQ</a>
+							</li>	
+							<li class="">
+								<a href="#"><i class="icon-user"></i> Profile</a>
+							</li>
+							<li class="">
+								<a href="#"><i class="icon-off"></i> Logout</a>
+							</li>	
+						</ul>
+					{% else %}
+					<form class="form-inline">
+					  <input type="text" class="span2" placeholder="Username">
+					  <input type="password" class="span2" placeholder="Password">
+					  <button type="submit" class="btn btn-primary">{% trans 'Sign in' %}</button>
+					</form>
+					<ul class="inline">
+						<li>
+							<label class="checkbox">
+							  <input type="checkbox"><small>{% trans 'Keep me logged in' %}</small>
+							</label>
+						</li>
+						<li><a href=""><small>{% trans 'Forgot your password?' %}</small></a></li>
+					</ul>
+					{% endif %}
+					{% endblock %}
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		
+		<div id="main_content_holder">
+			<div id="main_content">
+				{% block main_content %}
+				<div id="about" class="pull-left">
+					<h4><p class="text-center">About this Site</p></h4>
+					<ul>
+						<li>
+							<p class="text-left">
+								This website is a demonstration website for the free, open-source Social Assistance Registry project. The registry software is useful for social assistance reform projects, which typically require basic application intake software to support electronic intake of social assistance applications. The source code for this site is available here (link to the github.com repository)
+							</p>
+						</li>
+						<li>
+							<p class="text-left">
+								Please see the screenshots below and watch the YouTube video below to see how one might use this software.
+							</p>
+						</li>
+						<li>
+							<p class="text-left">
+								This site is implemented in Python using the Django (1.5) framework. It easily supports multiple languages.
+							</p>
+						</li>
+				</div>
+				
+				<div id="registration_form" class="pull-right">
+					<form>
+					  <fieldset>
+							<legend><b>Sign Up</b></legend>
+							<label><b><small>Type your email</small></b></label>
+							<input class="span4" type="text" placeholder="Email">
+							<label><b><small>Create a password</small></b></label>
+							<input class="span4" type="password" placeholder="Password">
+							<label><b><small>Confirm your password</small></b></label>
+							<input class="span4" type="password" placeholder="Confirm your password">
+						</fieldset>
+						 <button type="submit" class="btn btn-info">Sign Up</button>
+					</form>
+				</div>
+				<div class="clearfix"></div>
+				<div id="video_clip" class="pull-left">
+					<h4>Watch a video demo</h4>
+					<iframe width="480" height="300" src="http://www.youtube.com/embed/cou0e1HkKhI?feature=player_embedded" frameborder="0" allowfullscreen></iframe>
+				</div>
+				
+				<div id="howitworks" class="pull-right">
+					<p class="text-center"><img src="css/images/how.png" /></p>
+					<h4><p class="text-center">How it Works</p></h4>
+					<ul>
+						<li>
+							<p class="text-left">This is a demo of a national registry, which could be for social protection or programs. If you would like to have the code, please email me: shafique.jamal@gmail.com. I hope to one day put all the code on Github.com
+							</p>
+						</li>
+						<li>
+							<p class="text-left">This site is implemented in Python using the Django (1.5) framework</p>
+						</li>
+						<li>
+							<p class="text-left">It easily supports multiple languages</p>
+						</li>
+						<li>
+							<p class="text-left">It keeps track of changes to social assistance applications</p>
+						</li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+				
+				<div id="screenshots">
+					<table class="table table-bordered">
+						<tr>
+							<td>
+								<p class="text-center"><a href="https://github.com/shafiquejamal/socialassistanceregistry"><img src="css/images/download.png" /></a></p>
+								<h4 class="text-center">Download the code for this site from <a href=" https://github.com/shafiquejamal/socialassistanceregistry">GitHub.com</a></h4>
+							</td>
+							<td>
+								<p class="text-center"><a href=""><img src="css/images/comment.png" /></a></p>
+								<h4 class="text-center">Question? Comments?</h4>
+								<p class="text-center"> Email <a href="">shafique.jamal@gmail.com</a></p>
+							</td>
+							<td>
+							</td>
+						</tr>
+					</table>
+				</div>
+				{% endblock %}
+			</div>
+		</div>
+	</div>
 </body>
 </html>

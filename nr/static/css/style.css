@@ -832,7 +832,7 @@ a {
 
 header h1 {
   /* background-color: pink; */
-  font-size: 50px;
+  font-size: 30px;
   font-style: italic;
 }
 
@@ -1340,4 +1340,28 @@ h3 {
 
 .errorlist {
   color: red;
+}
+
+.pagination a {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+div[id^=applicant_qr_] {
+  /* border: 1px solid black; 
+  background: pink; */
+  margin-top: 10px;
+}
+
+div[id^=applicant_q_] {
+  /* border: 1px solid black; */
+  font-weight: bold;
+  background-color: #C1FFC1;
+  /* display:inline-block; 
+  margin-right: 5px; */
+}
+
+textarea
+{
+    width:96%;
 }
