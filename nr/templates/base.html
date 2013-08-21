@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load url from future %}
 {% load ifregextags %}
+{% load widget_tweaks %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
 "http://www.w3.org/TR/html4/strict.dtd">
@@ -46,19 +47,24 @@
 							</li>	
 						</ul>
 					{% else %}
-					<form class="form-inline">
-					  <input type="text" class="span2" placeholder="Username">
-					  <input type="password" class="span2" placeholder="Password">
+					<form class="form-inline" method="post" action="{% url 'userena_signin' %}">{% csrf_token %} 
+            {{ form_signin.non_field_errors }}
+            {{ form_signin.identification.errors }}
+            {{ form_signin.identification|add_class:"span2"|attr:"placeholder:Username" }}
+					  <!-- <input type="text" class="span2" placeholder="Username"> -->
+            {{ form_signin.password.errors }}
+            {{ form_signin.password|add_class:"span2"|attr:"placeholder:Password" }}
+					  <!--  <input type="password" class="span2" placeholder="Password"> -->
 					  <button type="submit" class="btn btn-primary">{% trans 'Sign in' %}</button>
-					</form>
-					<ul class="inline">
-						<li>
-							<label class="checkbox">
-							  <input type="checkbox"><small>{% trans 'Keep me logged in' %}</small>
-							</label>
-						</li>
-						<li><a href=""><small>{% trans 'Forgot your password?' %}</small></a></li>
-					</ul>
+  					<ul class="inline">
+  						<li>
+  							<label class="checkbox">
+  							  <input type="checkbox"><small>{% trans 'Keep me logged in' %}</small>
+  							</label>
+  						</li>
+  						<li><a href=""><small>{% trans 'Forgot your password?' %}</small></a></li>
+  					</ul>
+          </form>
 					{% endif %}
 					{% endblock %}
 				</div>
@@ -89,6 +95,7 @@
 						</li>
 				</div>
 				
+        {% if not user.is_authenticated %}
 				<div id="registration_form" class="pull-right">
 					<form>
 					  <fieldset>
@@ -103,6 +110,7 @@
 						 <button type="submit" class="btn btn-info">Sign Up</button>
 					</form>
 				</div>
+        {% endif %}
 				<div class="clearfix"></div>
 				<div id="video_clip" class="pull-left">
 					<h4>Watch a video demo</h4>
