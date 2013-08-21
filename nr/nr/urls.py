@@ -6,12 +6,16 @@ from django.contrib.auth.decorators import login_required
 
 from django.views.generic import TemplateView
 from userena import views as userena_views
+from userena.forms import (SignupForm, AuthenticationForm)
 
 from django.conf.urls.i18n import i18n_patterns
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+
+form_signup = SignupForm
+form_signin = AuthenticationForm
 
 urlpatterns = patterns('',
 	(r'^i18n/', include('django.conf.urls.i18n')),
@@ -29,6 +33,8 @@ urlpatterns += i18n_patterns('',
     #url(r'^accounts/signin/$', userena_views.signin, {'success_url': 'applicants', }, name='userena_signin'),
 
     # For django-userena
+    url(r'^accounts/signin/$', 'nr.views.signin', name='userena_signin'),
+    url(r'^accounts/signin/$', 'nr.views.signup', name='userena_signup'),
     (r'^accounts/', include('userena.urls')), 
     url(r'^$', 'nr.views.home', name='home'),
 
