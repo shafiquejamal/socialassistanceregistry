@@ -37,13 +37,13 @@
 					{% if user.is_authenticated %}
 						<ul class="inline">
 							<li class="">
-								<a href="#"><i class="icon-question-sign"></i> FAQ</a>
+								<a href="{% url "faq" %}"><i class="icon-question-sign"></i> FAQ</a>
 							</li>	
 							<li class="">
-								<a href="#"><i class="icon-user"></i> Profile</a>
+								<a href="{% url 'userena_profile_detail' user.username %}"><i class="icon-user"></i> Profile</a>
 							</li>
 							<li class="">
-								<a href="#"><i class="icon-off"></i> Logout</a>
+								<a href="{% url "userena_signout" %}"><i class="icon-off"></i> Logout</a>
 							</li>	
 						</ul>
 					{% else %}
