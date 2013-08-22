@@ -4,14 +4,37 @@
 
 {% block title %}{% trans "Account setup" %}{% endblock %}
 
-{% block content_title %}<h2>{% blocktrans with profile.user.username as username %}Account &raquo; {{ username }}{% endblocktrans %}</h2>{% endblock %}
+{% block main_content %}
+	<div class="row pull-left">
+		<div class="col-lg-3">
+			<div class="thumbnail">
+			  <img src="css/images/profile.jpg" style="width: 300px; height: 200px;">
+			  <div class="caption">
+				<h4>Joyce Jamon</h4>
+				<p><small><b>City:</b> Manila, Philippines</small></p>
 
-{% block content %}
+				<p><small><a href="#" class="btn btn-primary">Account Setting</a></small></p>
+			  </div>
+			</div>
+		 </div>
+	</div>
 
-<form class="userena" action="" enctype="multipart/form-data" method="post">
-  {% csrf_token %}
-    <h1>{% trans "Edit Profile" %}</h1>
-    {{ form.as_p }}
-  <input type="submit" value="{% trans "Save changes" %}" />
-</form>
-{% endblock %}
+	<div id="edit_form" class="pull-right">
+		<form>
+		  <fieldset>
+				<legend><b>Edit Profile</b></legend>
+				<label><b><small>First Name:</small></b></label>
+				<input class="span4" type="text" value="Joyce">
+				<label><b><small>Last Name:</small></b></label>
+				<input class="span4" type="text" value="Jamon">
+				<label><b><small>Privacy:</small></b></label>
+				<select class="span4">
+					<option>Open - anyone can view your username</option>
+					<option>Registered - only registered users can view your username</option>
+					<option>Closed - only you can view your username</option>
+				</select>
+			</fieldset>
+			 <button type="submit" class="btn btn-info">Save changes</button>
+		</form>
+	</div>
+{& endblock %}
