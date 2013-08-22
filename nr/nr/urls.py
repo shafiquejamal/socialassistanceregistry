@@ -34,7 +34,7 @@ urlpatterns += i18n_patterns('',
 
     # For django-userena
     url(r'^accounts/signin/$', 'nr.views.signin', name='userena_signin'),
-    url(r'^accounts/signin/$', 'nr.views.signup', name='userena_signup'),
+    url(r'^accounts/signup/$', 'nr.views.signup', name='userena_signup'),
     (r'^accounts/', include('userena.urls')), 
     url(r'^$', 'nr.views.home', name='home'),
 

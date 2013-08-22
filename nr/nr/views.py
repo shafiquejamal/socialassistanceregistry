@@ -16,6 +16,8 @@ from userena.decorators import secure_required
 from userena.utils import signin_redirect, get_profile_model, get_user_model
 from django.views.generic import TemplateView
 from userena import settings as userena_settings
+from userena import signals as userena_signals
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 
 class ExtraContextTemplateView(TemplateView):
@@ -32,9 +34,7 @@ class ExtraContextTemplateView(TemplateView):
     post = TemplateView.get
 # I want to 
 def home(request):
-	form_signup = SignupForm
-	form_signin = AuthenticationForm
-	return render_to_response("home.html", { "form": form_signup, "form_signin": form_signin,}, context_instance=RequestContext(request))
+	return render_to_response("home.html", { "form_signup": SignupForm, "form_signin": AuthenticationForm,}, context_instance=RequestContext(request))
 
 @secure_required
 def signin(request, auth_form=AuthenticationForm,
@@ -112,6 +112,7 @@ def signin(request, auth_form=AuthenticationForm,
     if not extra_context: extra_context = dict()
     extra_context.update({
         'form_signin': form,
+        'form_signup': SignupForm,
         'next': request.REQUEST.get(redirect_field_name),
     })
     return ExtraContextTemplateView.as_view(template_name=template_name,
@@ -157,6 +158,9 @@ def signup(request, signup_form=SignupForm,
     if userena_settings.USERENA_WITHOUT_USERNAMES and (signup_form == SignupForm):
         signup_form = SignupFormOnlyEmail
 
+    auth_form=AuthenticationForm
+    form_signin = auth_form()
+
     form = signup_form()
 
     if request.method == 'POST':
@@ -185,7 +189,8 @@ def signup(request, signup_form=SignupForm,
             return redirect(redirect_to)
 
     if not extra_context: extra_context = dict()
-    extra_context['form'] = form
+    extra_context['form_signin'] = form_signin
+    extra_context['form_signup'] = form
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 

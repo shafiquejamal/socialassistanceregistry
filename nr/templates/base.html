@@ -97,15 +97,22 @@
 				
         {% if not user.is_authenticated %}
 				<div id="registration_form" class="pull-right">
-					<form>
+					<form class="userena" action="{% url 'userena_signup' %}" method="post">{% csrf_token %}
 					  <fieldset>
+              {{ form_signup.non_field_errors }}
 							<legend><b>Sign Up</b></legend>
-							<label><b><small>Type your email</small></b></label>
-							<input class="span4" type="text" placeholder="Email">
+							<label><b><small>Type your username</small></b></label>
+              {{ form_signup.username.errors }}
+              {{ form_signup.username|add_class:"span4"|attr:"placeholder:Username" }}
+              <label><b><small>Type your email</small></b></label>
+              {{ form_signup.email.errors }}
+              {{ form_signup.email|add_class:"span4"|attr:"placeholder:Email" }}
 							<label><b><small>Create a password</small></b></label>
-							<input class="span4" type="password" placeholder="Password">
+							{{ form_signup.password1.errors }}
+              {{ form_signup.password1|add_class:"span4"|attr:"placeholder:Password" }}
 							<label><b><small>Confirm your password</small></b></label>
-							<input class="span4" type="password" placeholder="Confirm your password">
+							{{ form_signup.password2.errors }}
+              {{ form_signup.password2|add_class:"span4"|attr:"placeholder:Confirm your password" }}
 						</fieldset>
 						 <button type="submit" class="btn btn-info">Sign Up</button>
 					</form>
