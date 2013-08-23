@@ -3,41 +3,96 @@
 {% load i18n %}
 {% load url from future %}
 {% load humanize %}
+{% load widget_tweaks %}
 
-{% block content_title %}<h1>{% trans 'Contact Us' %}</h1>{% endblock %}
+{% block title %}<h1>{% trans 'Home' %}</h1>{% endblock %}
 
 {% block content %}
-<div class="grid_24">
-<div class="grid_12 leftupperbox alpha">
-	<h2>{% trans 'About this site' %}</h2>
-	<ul>
-	<li>{% trans 'This is a demo of a national registry, which could be for social protection or programs. If you would like to have the code, please email me: shafique.jamal@gmail.com. I hope to one day put all the code on Github.com' %}</li>
-    <li>{% trans "This site is implemented in Python using the Django (1.5) framework" %}</li>
-    <li>{% trans "It easily supports multiple languages" %}</li>
-    <li>{% trans "It keeps track of changes to social assistance applications" %}</li>
-	</ul>
-</div>
-<div class="grid_12 rightupperbox omega">
-	<h2>{% trans 'How to use this site' %}</h2>
-    <ul>
-    <li>{% trans 'Register as a social administrator by filling the form below or clicking register (top right) and filling the form that is then presented' %}</li>
-    <li>{% trans 'After you register, click on "Registry Applications" in the top right menu to view applications (details and index), enter applicaitons, edit applications, and maybe more. Note: you can only edit applications that you have entered, not applications that others have entered. But you can view all applications in the system.' %}</li>
-    </ul>
-</div>
-</div>
-<div class="grid_24">
-<div class="grid_12 leftlowerbox alpha">
-	<h2>{% trans 'Download the code for this site from GitHub.com' %}</h2>
-    <ul>
-    <li>{% trans 'The code is available here:' %} <a href="https://github.com/shafiquejamal/socialassistanceregistry">https://github.com/shafiquejamal/socialassistanceregistry</a></li>
-    </ul>
-</div>
-<div class="grid_12 rightlowerbox omega">
-    <h2>{% trans 'Watch a video demo' %}</h2>
-    <iframe width="560" height="315" src="http://www.youtube.com/embed/cou0e1HkKhI" frameborder="0" allowfullscreen></iframe>
-</div>	
-</div>
+<div id="about" class="pull-left">
+		<h4><p class="text-center">{%trans 'About this Site' %}</p></h4>
+		<ul>
+			<li>
+				<p class="text-left">
+					{% trans 'This website is a demonstration website for the free, open-source Social Assistance Registry project. The registry software is useful for social assistance reform projects, which typically require basic application intake software to support electronic intake of social assistance applications. The source code for this site is available here (link to the github.com repository)' %}
+				</p>
+			</li>
+			<li>
+				<p class="text-left">
+					{% trans 'Please see the screenshots below and watch the YouTube video below to see how one might use this software.' %}
+				</p>
+			</li>
+			<li>
+				<p class="text-left">
+					{% trans 'This site is implemented in Python using the Django (1.5) framework. It easily supports multiple languages.' %}
+				</p>
+			</li>
+	</div>
+	
 {% if not user.is_authenticated %}
-{% include 'register_snippet.html' %}
+	<div id="registration_form" class="pull-right">
+		<form class="userena" action="{% url 'userena_signup' %}" method="post">{% csrf_token %}
+		  <fieldset>
+  {{ form_signup.non_field_errors }}
+				<legend><b>Sign Up</b></legend>
+				<label><b><small>Type your username</small></b></label>
+  {{ form_signup.username.errors }}
+  {{ form_signup.username|add_class:"span4"|attr:"placeholder:Username" }}
+  <label><b><small>Type your email</small></b></label>
+  {{ form_signup.email.errors }}
+  {{ form_signup.email|add_class:"span4"|attr:"placeholder:Email" }}
+				<label><b><small>Create a password</small></b></label>
+				{{ form_signup.password1.errors }}
+  {{ form_signup.password1|add_class:"span4"|attr:"placeholder:Password" }}
+				<label><b><small>Confirm your password</small></b></label>
+				{{ form_signup.password2.errors }}
+  {{ form_signup.password2|add_class:"span4"|attr:"placeholder:Confirm your password" }}
+			</fieldset>
+			 <button type="submit" class="btn btn-info">Sign Up</button>
+		</form>
+	</div>
 {% endif %}
+	<div class="clearfix"></div>
+	<div id="video_clip" class="pull-left">
+		<h4>Watch a video demo</h4>
+		<iframe width="480" height="300" src="http://www.youtube.com/embed/cou0e1HkKhI?feature=player_embedded" frameborder="0" allowfullscreen></iframe>
+	</div>
+	
+	<div id="howitworks" class="pull-right">
+		<p class="text-center"><img src="css/images/how.png" /></p>
+		<h4><p class="text-center">{% trans 'How it Works' %}</p></h4>
+		<ul>
+			<li>
+				<p class="text-left">{% trans 'This is a demo of a national registry, which could be for social protection or programs. If you would like to have the code, please email me: shafique.jamal@gmail.com. I hope to one day put all the code on Github.com' %}
+				</p>
+			</li>
+			<li>
+				<p class="text-left">{% trans 'This site is implemented in Python using the Django (1.5) framework' %}</p>
+			</li>
+			<li>
+				<p class="text-left">{% trans 'It easily supports multiple languages' %}</p>
+			</li>
+			<li>
+				<p class="text-left">{% trans 'It keeps track of changes to social assistance applications' %}</p>
+			</li>
+		</ul>
+	</div>
+	<div class="clearfix"></div>
+	
+	<div id="screenshots">
+		<table class="table table-bordered">
+			<tr>
+				<td>
+					<p class="text-center"><a href="https://github.com/shafiquejamal/socialassistanceregistry"><img src="css/images/download.png" /></a></p>
+					<h4 class="text-center">{% trans 'Download the code for this site from <a href=" https://github.com/shafiquejamal/socialassistanceregistry">GitHub.com' %}</a></h4>
+				</td>
+				<td>
+					<p class="text-center"><a href=""><img src="css/images/comment.png" /></a></p>
+					<h4 class="text-center">{% trans 'Question? Comments?' %}</h4>
+					<p class="text-center"> {% trans 'Email <a href="">shafique.jamal@gmail.com' %}</a></p>
+				</td>
+				<td>
+				</td>
+			</tr>
+		</table>
+	</div>
 {% endblock %}

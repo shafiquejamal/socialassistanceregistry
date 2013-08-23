@@ -72,96 +72,10 @@
 			</div>
 		</div>
 		
+		
 		<div id="main_content_holder">
 			<div id="main_content">
-				{% block main_content %}
-				<div id="about" class="pull-left">
-					<h4><p class="text-center">About this Site</p></h4>
-					<ul>
-						<li>
-							<p class="text-left">
-								This website is a demonstration website for the free, open-source Social Assistance Registry project. The registry software is useful for social assistance reform projects, which typically require basic application intake software to support electronic intake of social assistance applications. The source code for this site is available here (link to the github.com repository)
-							</p>
-						</li>
-						<li>
-							<p class="text-left">
-								Please see the screenshots below and watch the YouTube video below to see how one might use this software.
-							</p>
-						</li>
-						<li>
-							<p class="text-left">
-								This site is implemented in Python using the Django (1.5) framework. It easily supports multiple languages.
-							</p>
-						</li>
-				</div>
-				
-        {% if not user.is_authenticated %}
-				<div id="registration_form" class="pull-right">
-					<form class="userena" action="{% url 'userena_signup' %}" method="post">{% csrf_token %}
-					  <fieldset>
-              {{ form_signup.non_field_errors }}
-							<legend><b>Sign Up</b></legend>
-							<label><b><small>Type your username</small></b></label>
-              {{ form_signup.username.errors }}
-              {{ form_signup.username|add_class:"span4"|attr:"placeholder:Username" }}
-              <label><b><small>Type your email</small></b></label>
-              {{ form_signup.email.errors }}
-              {{ form_signup.email|add_class:"span4"|attr:"placeholder:Email" }}
-							<label><b><small>Create a password</small></b></label>
-							{{ form_signup.password1.errors }}
-              {{ form_signup.password1|add_class:"span4"|attr:"placeholder:Password" }}
-							<label><b><small>Confirm your password</small></b></label>
-							{{ form_signup.password2.errors }}
-              {{ form_signup.password2|add_class:"span4"|attr:"placeholder:Confirm your password" }}
-						</fieldset>
-						 <button type="submit" class="btn btn-info">Sign Up</button>
-					</form>
-				</div>
-        {% endif %}
-				<div class="clearfix"></div>
-				<div id="video_clip" class="pull-left">
-					<h4>Watch a video demo</h4>
-					<iframe width="480" height="300" src="http://www.youtube.com/embed/cou0e1HkKhI?feature=player_embedded" frameborder="0" allowfullscreen></iframe>
-				</div>
-				
-				<div id="howitworks" class="pull-right">
-					<p class="text-center"><img src="css/images/how.png" /></p>
-					<h4><p class="text-center">How it Works</p></h4>
-					<ul>
-						<li>
-							<p class="text-left">This is a demo of a national registry, which could be for social protection or programs. If you would like to have the code, please email me: shafique.jamal@gmail.com. I hope to one day put all the code on Github.com
-							</p>
-						</li>
-						<li>
-							<p class="text-left">This site is implemented in Python using the Django (1.5) framework</p>
-						</li>
-						<li>
-							<p class="text-left">It easily supports multiple languages</p>
-						</li>
-						<li>
-							<p class="text-left">It keeps track of changes to social assistance applications</p>
-						</li>
-					</ul>
-				</div>
-				<div class="clearfix"></div>
-				
-				<div id="screenshots">
-					<table class="table table-bordered">
-						<tr>
-							<td>
-								<p class="text-center"><a href="https://github.com/shafiquejamal/socialassistanceregistry"><img src="css/images/download.png" /></a></p>
-								<h4 class="text-center">Download the code for this site from <a href=" https://github.com/shafiquejamal/socialassistanceregistry">GitHub.com</a></h4>
-							</td>
-							<td>
-								<p class="text-center"><a href=""><img src="css/images/comment.png" /></a></p>
-								<h4 class="text-center">Question? Comments?</h4>
-								<p class="text-center"> Email <a href="">shafique.jamal@gmail.com</a></p>
-							</td>
-							<td>
-							</td>
-						</tr>
-					</table>
-				</div>
+				{% block content %}
 				{% endblock %}
 			</div>
 		</div>

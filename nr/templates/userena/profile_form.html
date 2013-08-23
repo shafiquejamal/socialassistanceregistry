@@ -3,7 +3,7 @@
 {% load url from future %}
 
 {% block title %}{% trans "Account setup" %}{% endblock %}
-
+{% block subtitle %}{% endblock %}
 {% block main_content %}
 	<div class="row pull-left">
 		<div class="col-lg-3">
@@ -37,4 +37,4 @@
 			 <button type="submit" class="btn btn-info">Save changes</button>
 		</form>
 	</div>
-{& endblock %}
+{% endblock %}
