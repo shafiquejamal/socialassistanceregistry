@@ -10,7 +10,7 @@ class HouseholdmemberForm(ModelForm):
 
 	class Meta:
 		model = Householdmember
-		
+		exclude = ['id', 'ORDER']
 
 	#date_of_birth = DateField(input_formats=['Y-m-d'])
 	

@@ -48,7 +48,7 @@ def update(request, pk_masked):
 
 	HouseholdmemberInlineFormSet = inlineformset_factory(Applicant, Householdmember, form=HouseholdmemberForm, 
 														extra=settings.APPLICANTS_EXTRA_HOUSEHOLDMEMBER_FIELD, 
-														can_order=True,
+														can_order=False,
 														max_num=settings.INLINEFORMSET_MAXNUM
 		)
 	if request.method == "POST":

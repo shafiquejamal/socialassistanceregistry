@@ -137,7 +137,7 @@ class Applicant(models.Model):
 					value = None
 
 			# only display fields with values and skip some fields entirely
-			if f.editable and value and f.name not in ('id', 'created_at', 'updated_at', 'user') :
+			if f.editable and f.name not in ('id', 'created_at', 'updated_at', 'user') :
 
 				fields.append(
 					{
@@ -214,10 +214,38 @@ class Householdmember(models.Model):
 	national_id		  = models.CharField(_('National ID'),max_length=50,blank=False, unique=True)
 	male 			  = models.IntegerField(_('Gender'), choices = GENDER_CHOICES, blank=False)
 	date_of_birth     = models.DateField()
-	rel_to_head       = models.IntegerField(_('Gender'), choices = RELTOHEAD_CHOICES, blank=False)
-	disability 		  = models.IntegerField(_('Does [NAME] suffer from a chronic illness or disability that has lasted more than 3 months? For example: congenital abnormalities; nervous system and sense organ diseases; mental disorder; diseases of respiratory organs (such as asthma); and diseases of blood and blood producing organs.'), choices = YESNO_CHOICES, blank=False)
+	rel_to_head       = models.IntegerField(_('Relationship to HH Head'), choices = RELTOHEAD_CHOICES, blank=False)
+	disability 		  = models.IntegerField(_('Has a disability'), choices = YESNO_CHOICES, blank=False)
 	created_at 		  = models.DateTimeField(auto_now_add = True)
 	updated_at        = models.DateTimeField(auto_now = True)
 
 	class Meta:
 		ordering = ["rel_to_head"]
+
+	# from http://stackoverflow.com/questions/2170228/django-iterate-over-model-instance-field-names-and-values-in-template
+	def get_all_fields(self):
+		fields = []
+		for f in self._meta.fields:
+
+			fname = f.name        
+			# resolve picklists/choices, with get_xyz_display() function
+			get_choice = 'get_'+fname+'_display'
+			if hasattr( self, get_choice):
+				value = getattr( self, get_choice)()
+			else:
+				try :
+					value = getattr(self, fname)
+				except User.DoesNotExist:
+					value = None
+
+			# only display fields with values and skip some fields entirely
+			if f.editable and f.name not in ('id', 'created_at', 'updated_at', 'applicant'):
+
+				fields.append(
+					{
+					'label':f.verbose_name, 
+					'name':f.name, 
+					'value':value,
+					}
+				)
+		return fields

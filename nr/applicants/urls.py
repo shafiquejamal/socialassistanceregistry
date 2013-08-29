@@ -27,13 +27,12 @@ urlpatterns = patterns('',
 
 	url(r'^(?P<pk_masked>\d+)/$',
 		login_required(DetailViewUnmask.as_view( model=Applicant,
-							template_name='applicants/detail.html'
+							template_name='applicants/detail.html',
 							)), 
 		name='detail'),
 
 	url(r'^create/$','applicants.views.create', name='create'),
 
-	# Should be able to do these only if status is not 0 (i.e. package is not yet at U.S. warehouse)
 	url(r'^update/(?P<pk_masked>\d+)/$','applicants.views.update', name='update'),
 	url(r'^update_applicant/(?P<pk_masked>\d+)/$','applicants.views.update_applicant', name='update_applicant'),
 	url(r'^delete/(?P<pk_masked>\d+)/$','applicants.views.delete', name='delete'),

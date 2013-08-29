@@ -30,18 +30,15 @@
 	
 	{% for householdmember in applicant.householdmember_set.all %}
 	<tr>
-		<td>{{ householdmember.first_name }}</td>
-		<td>{{ householdmember.middle_name  }}</td>
-		<td>{{ householdmember.last_name  }}</td>
-		<td>{{ householdmember.national_id  }}</td>
-		<td>{{ householdmember.get_male_display }}</td>
-		<td>{{ householdmember.date_of_birth }}</td>
-		<td>{{ householdmember.get_rel_to_head_display }}</td>
-		<td>{{ householdmember.get_disability_display }}</td>
+		
+		{% for field in householdmember.get_all_fields %}
+			<td>{{ field.value }}</td>
+		{% endfor %}
+
 	</tr>
 	{% endfor %}
 </table>
-	<p>*Does [NAME] suffer from a chronic illness or disability that has lasted more than 3 months? For example: congenital abnormalities; nervous system and sense organ diseases; mental disorder; diseases of respiratory organs (such as asthma); and diseases of blood and blood producing organs.</p>
+
 	{% else %}
 		{% trans 'No householdmembers in this applicant.' %}<br/><br/>
 	{% endif %}

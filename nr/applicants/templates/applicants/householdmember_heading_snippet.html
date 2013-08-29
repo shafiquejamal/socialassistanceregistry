@@ -3,11 +3,13 @@
 {% load humanize %}
 {% load widget_tweaks %}
 
-<th class="span4">{% trans 'First Name' %}</th>
-<th class="span4">{% trans 'Middle Name' %}</th>
-<th class="span4">{% trans 'Last Name' %}</th>
-<th class="span4">{% trans 'National ID' %}</th>
-<th class="span4">{% trans 'Gender' %}</th>
-<th class="span4">{% trans 'Date of Birth' %}</th>
-<th class="span4">{% trans 'Rel to HH head' %}</th>
-<th class="span4">{% trans 'Disability*' %}</th>
+{% for householdmember in applicant.householdmember_set.all %}	
+	{% ifequal forloop.counter 1 %}
+		{% for field in householdmember.get_all_fields %}
+			<th>{{ field.label }}</th>
+		{% endfor %}
+	{% endifequal %}
+{% endfor %}
+
+
+
