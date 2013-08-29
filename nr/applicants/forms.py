@@ -10,6 +10,7 @@ class HouseholdmemberForm(ModelForm):
 
 	class Meta:
 		model = Householdmember
+		
 
 	#date_of_birth = DateField(input_formats=['Y-m-d'])
 	

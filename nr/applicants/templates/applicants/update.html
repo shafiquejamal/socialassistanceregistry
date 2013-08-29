@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load url from future %}
 {% load humanize %}
+{% load widget_tweaks %}
 
 {% block content_title %}<h1>{% trans 'Register New Package' %}</h1>{% endblock %}
 {% block extrahead %}
@@ -117,6 +118,14 @@
 	</tr>
 	{% for form in formset_householdmember %}
 	<tr>
+		{% for field in form %}
+			<td>
+			{{ field.errors|add_class:"span4" }}
+			<!-- if the field is a checkbox or a dropdown, then need a different span -->
+				{{ field|add_class:"span2" }}
+			</td>
+		{% endfor %}
+		<!--
 		<td>{{ form.id }}{{ form.first_name }}{% if form.errors.first_name %}<br/>{{ form.errors.first_name }}{% endif %}</td>
 		<td>{{ form.middle_name }}{% if form.errors.middle_name %}<br/>{{ form.errors.middle_name }}{% endif %}</td>
 		<td>{{ form.last_name }}{% if form.errors.last_name %}<br/>{{ form.errors.last_name }}{% endif %}</td>
@@ -126,6 +135,7 @@
 		<td>{{ form.rel_to_head }}{% if form.errors.rel_to_head %}<br/>{{ form.errors.rel_to_head }}{% endif %}</td>
 		<td>{{ form.disability }}{% if form.errors.disability %}<br/>{{ form.errors.disability }}{% endif %}</td>
 		<td>{{ form.DELETE}} </td>
+		-->
 	</tr>
 	{% endfor %}
 </table>
