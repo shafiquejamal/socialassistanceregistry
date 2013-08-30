@@ -9,3 +9,4 @@ easy-thumbnails
 django-guardian
 PIL
 django-reversion
+django-mathfilters

@@ -3,8 +3,10 @@
 {% load url from future %}
 {% load humanize %}
 {% load widget_tweaks %}
+{% load mathfilters %}
+{% load get_range %}
 
-{% block content_title %}<h1>{% trans 'Register New Package' %}</h1>{% endblock %}
+{% block content_title %}{% trans 'Update or add household members' %}{% endblock %}
 {% block extrahead %}
 	<link rel="stylesheet" href="/static/development-bundle/themes/base/jquery.ui.all.css">
     <script src="/static/js/jquery-1.9.1.js"></script>
@@ -25,6 +27,23 @@
 
 {% block content %}
 <table class="package_list">
+	{% for k in applicant.get_all_fields|length|div:5|floatformat|add:1|get_range %}
+		<tr>
+			{% for field in applicant.get_all_fields %}
+			{% if forloop.counter >= k|mul:5 and forloop.counter <= k|mul:5|add:4 %}
+				<th>{{ field.label }}</th>
+			{% endif %}
+			{% endfor %}
+		</tr>
+		<tr>
+			{% for field in applicant.get_all_fields %}
+			{% if forloop.counter >= k|mul:5 and forloop.counter <= k|mul:5|add:4 %}
+				<td>{{ field.value }}</td>
+			{% endif %}
+			{% endfor %}
+		</tr>
+	{% endfor %}
+<!--
 	{% include "applicants/applicant_heading1detail_snippet.html" %}
 	<tr>
 		<td>{{ applicant.bank_card_number }}</td>
@@ -106,7 +125,8 @@
 	</tr>
 	<tr>
 		<td>{{ applicant.score }}</td>
-	</tr>	
+	</tr>
+-->	
 </table>
 <h2>Household Members</h2>
 <form class="package_detail" action="{% url 'applicants:update' pk_masked %}" method="post" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>{% csrf_token %}

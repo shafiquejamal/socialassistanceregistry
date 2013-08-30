@@ -200,6 +200,7 @@ INSTALLED_APPS = (
     'accounts',
     'applicants',
     'widget_tweaks',
+    'mathfilters',
 )
 
 # A sample logging configuration. The only tangible logging
