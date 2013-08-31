@@ -3,6 +3,8 @@
 {% load url from future %}
 {% load humanize %}
 {% load widget_tweaks %}
+{% load mathfilters %}
+{% load get_range %}
 
 {% block content_title %}{% trans 'Register New Package' %}{% endblock %}
 
@@ -10,16 +12,26 @@
 
 <form action="{% url 'applicants:create' %}" method="post" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>{% csrf_token %}
 
+	<table>
 	{% for field in form %}
-		<div id="applicant_qr_{{ forloop.counter }}" class="grid_8">
-			<div id="applicant_q_{{ forloop.counter }}" >
-				{{ field.label_tag }}{{ field.errors }}	
-			</div>
-			<div id="applicant_r_{{ forloop.counter }}" >
-				{{ field|add_class:"span4" }}
-			</div>
-		</div>
+		{% if forloop.counter0|divisibleby:5 %}
+			<tr>
+			{% for field in form %}
+				{% if forloop.counter0 >= forloop.parentloop.counter0 and forloop.counter0 <= forloop.parentloop.counter0|add:4 %}
+					<th>{{ field.label_tag }}{{ field.errors }}	</th>
+				{% endif %}
+			{% endfor %}
+			</tr>
+			<tr>
+			{% for field in form %}
+				{% if forloop.counter0 >= forloop.parentloop.counter0 and forloop.counter0 <= forloop.parentloop.counter0|add:4 %}
+					<td>{{ field }}</td>
+				{% endif %}
+			{% endfor %}
+			</tr>
+		{% endif %}
 	{% endfor %}
+	</table>
 	<div class="grid_24">
 		<input type="submit" value="Next >" />
 	</div>
