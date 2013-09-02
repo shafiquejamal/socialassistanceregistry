@@ -8,21 +8,37 @@
 
 {% block content %}
 
-<form action="{% url 'applicants:create' %}" method="post" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>{% csrf_token %}
-
-	{% for field in form %}
-		<div id="applicant_qr_{{ forloop.counter }}" class="grid_8">
-			<div id="applicant_q_{{ forloop.counter }}" >
-				{{ field.label_tag }}{{ field.errors }}	
-			</div>
-			<div id="applicant_r_{{ forloop.counter }}" >
-				{{ field|add_class:"span4" }}
-			</div>
-		</div>
-	{% endfor %}
-	<div class="grid_24">
-		<input type="submit" value="Next >" />
-	</div>
-</form>
+<div id="list_applicants">
+	<a class="btn btn-info" href="#"><i class="icon-book icon-white"></i> List of Applicants</a>
+	<a class="btn btn-info" href="#"><i class="icon-plus icon-white"></i> New Applicant</a> 
+	<a class="btn btn-info" href="#"><i class="icon-download-alt icon-white"></i> Download Applicant Data</a>
+		
+	<form action="{% url 'applicants:create' %}" method="post" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>{% csrf_token %}
+		<table class="table table-bordered table-striped">
+			<tbody>
+			{% for field in form %}
+				{% if forloop.counter0|divisibleby:4 %}
+				<tr>
+					{% for field in form %}
+						{% if forloop.counter0 >= forloop.parentloop.counter0 and forloop.counter0 <= forloop.parentloop.counter0|add:3 %}
+							<th>{{ field.label_tag }}{{ field.errors }}	</th>
+						{% endif %}
+					{% endfor %}
+				</tr>
+				<tr>
+					{% for field in form %}
+						{% if forloop.counter0 >= forloop.parentloop.counter0 and forloop.counter0 <= forloop.parentloop.counter0|add:3 %}
+							<td>{{ field }}</td>
+						{% endif %}
+					{% endfor %}
+				</tr>
+				{% endif %}
+			{% endfor %}
+			</tbody>
+		</table>
+		<button type="submit" class="btn btn-primary pull-right">Next <i class="icon-chevron-right icon-white"></i></button>
+	</form>
+</div>
+<div class="clearfix"></div>
 
 {% endblock %}
