@@ -26,114 +26,14 @@
 {% endblock %}
 
 {% block content %}
-<table class="package_list">
-	{% for k in applicant.get_all_fields|length|div:5|floatformat|add:1|get_range %}
-		<tr>
-			{% for field in applicant.get_all_fields %}
-			{% if forloop.counter >= k|mul:5 and forloop.counter <= k|mul:5|add:4 %}
-				<th>{{ field.label }}</th>
-			{% endif %}
-			{% endfor %}
-		</tr>
-		<tr>
-			{% for field in applicant.get_all_fields %}
-			{% if forloop.counter >= k|mul:5 and forloop.counter <= k|mul:5|add:4 %}
-				<td>{{ field.value }}</td>
-			{% endif %}
-			{% endfor %}
-		</tr>
-	{% endfor %}
-<!--
-	{% include "applicants/applicant_heading1detail_snippet.html" %}
-	<tr>
-		<td>{{ applicant.bank_card_number }}</td>
-		<td>{{ applicant.site_of_interview }}</td>
-		<td>{{ applicant.housenumber }}</td>
-		<td>{{ applicant.address_line1 }}</td>
-		<td>{{ applicant.address_line2 }}</td>
-	</tr>
-</table>
-<table class="package_list">
-	{% include "applicants/applicant_heading2detail_snippet.html" %}
-	<tr>
-		<td>{{ applicant.municipality }}</td>
-		<td>{{ applicant.district }}</td>
-		<td>{{ applicant.get_urban_display }}</td>
-		<td>{{ applicant.postal }}</td>
-	</tr>	
-</table>
-<table class="package_list">
-	{% include "applicants/applicant_heading3detail_snippet.html" %}	
-	<tr>
-		<td>{{ applicant.home_phone }}</td>
-		<td>{{ applicant.mobile_phone }}</td>
-		<td>{{ applicant.get_dwelling_type_display }}</td>
-		<td>{{ applicant.rooms }}</td>
-		<td>{{ applicant.get_condition_display }}</td>
-	</tr>
-</table>
-<table class="package_list">
-	{% include "applicants/applicant_heading4detail_snippet.html" %}	
-	<tr>
-		<td>{{ applicant.get_gas_for_lighting_display }}</td>
-		<td>{{ applicant.get_gas_for_heating_display }}</td>
-		<td>{{ applicant.get_gas_for_cooking_display }}</td>
-		<td>{{ applicant.get_gas_for_other_display }}</td>
-	</tr>
-</table>
-<table class="package_list">
-	{% include "applicants/applicant_heading5detail_snippet.html" %}
-	<tr>
-		<td>{{ applicant.get_a_color_tv_display }}</td>
-		<td>{{ applicant.get_a_washing_machine_display }}</td>
-		<td>{{ applicant.q_cows }}</td>
-		<td>{{ applicant.q_pigs }}</td>
-	</tr>	
-</table>
-<table class="package_list">
-	{% include "applicants/applicant_heading6detail_snippet.html" %}
-	<tr>
-		<td>{{ applicant.sp_ne_amount }}</td>
-		<td>{{ applicant.sp_ne_months }}</td>
-		<td>{{ applicant.sp_ne_last12m }}</td>
-	</tr>	
-</table>
-<table class="package_list">
-	{% include "applicants/applicant_heading7detail_snippet.html" %}
-	<tr>
-		<td>{{ applicant.sp_dp_amount }}</td>
-		<td>{{ applicant.sp_dp_months }}</td>
-		<td>{{ applicant.sp_dp_last12m }}</td>
-	</tr>	
-</table>
-<table class="package_list">
-	{% include "applicants/applicant_heading8detail_snippet.html" %}
-	<tr>
-		<td>{{ applicant.oi_remit }}</td>
-		<td>{{ applicant.oi_rent }}</td>
-	</tr>	
-</table>
-<table class="package_list">
-	{% include "applicants/applicant_heading9detail_snippet.html" %}
-	<tr>
-		<td>{{ applicant.tell_me }}</td>
-	</tr>	
-</table>
-<table class="package_list">
-	<tr>
-		<th>Score:</th>
-	</tr>
-	<tr>
-		<td>{{ applicant.score }}</td>
-	</tr>
--->	
-</table>
+{% include "applicants/applicant_level_info.html" %}
+
 <h2>Household Members</h2>
 <form class="package_detail" action="{% url 'applicants:update' pk_masked %}" method="post" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>{% csrf_token %}
 {{ formset_householdmember.management_form }}
 <table class="package_detail">	
 	<tr>
-		{% include "applicants/householdmember_heading_snippet.html" %}
+		
 		<th class="delete">Delete?</th>
 	</tr>
 	{% for form in formset_householdmember %}

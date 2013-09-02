@@ -1,0 +1,22 @@
+{% load widget_tweaks %}
+{% load mathfilters %}
+{% load get_range %}
+
+<table class="package_list">
+	{% for k in applicant.get_all_fields|length|div:5|floatformat|add:1|get_range %}
+		<tr>
+			{% for field in applicant.get_all_fields %}
+			{% if forloop.counter >= k|mul:5 and forloop.counter <= k|mul:5|add:4 %}
+				<th>{{ field.label }}</th>
+			{% endif %}
+			{% endfor %}
+		</tr>
+		<tr>
+			{% for field in applicant.get_all_fields %}
+			{% if forloop.counter >= k|mul:5 and forloop.counter <= k|mul:5|add:4 %}
+				<td>{{ field.value }}</td>
+			{% endif %}
+			{% endfor %}
+		</tr>
+	{% endfor %}
+</table>

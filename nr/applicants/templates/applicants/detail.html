@@ -3,27 +3,18 @@
 {% load url from future %}
 {% load humanize %}
 {% load widget_tweaks %}
+{% load mathfilters %}
+{% load get_range %}
 
 {% block content_title %}{% trans 'My Applicant' %}{% endblock %}
 
 {% block content %}
+{% include "applicants/applicant_level_info.html" %}
 
-	<div class="clearfix package_detail">
-	{% for f in applicant.get_all_fields %}
-		<div id="applicant_qr_{{ forloop.counter }}" class="grid_8">
-    		<div id="applicant_q_{{ forloop.counter }}" >
-    			{{f.label|capfirst}}
-    		</div>
-    		<div id="applicant_r_{{ forloop.counter }}" >
-    			{{f.value|escape|urlize}}
-    	 	</div>
-    	 </div>
-	{% endfor %}
-	</div>
-
-{% if applicant.householdmember_set.all %}
 <h2>Household members</h2>
+{% if applicant.householdmember_set.all %}
 <table class="package_detail">
+
 	<tr>
 		{% include "applicants/householdmember_heading_snippet.html" %}
 	</tr>
