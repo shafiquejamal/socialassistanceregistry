@@ -13,43 +13,40 @@
 
 <h2>Household members</h2>
 {% if applicant.householdmember_set.all %}
-<table class="package_detail">
+	<table class="table table-bordered table-striped info">
+		<tr>
+			{% include "applicants/householdmember_heading_snippet.html" %}
+		</tr>
+		{% for householdmember in applicant.householdmember_set.all %}
+		<tr>
+			
+			{% for field in householdmember.get_all_fields %}
+				<td>{{ field.value }}</td>
+			{% endfor %}
 
-	<tr>
-		{% include "applicants/householdmember_heading_snippet.html" %}
-	</tr>
-	
-	{% for householdmember in applicant.householdmember_set.all %}
-	<tr>
-		
-		{% for field in householdmember.get_all_fields %}
-			<td>{{ field.value }}</td>
+		</tr>
 		{% endfor %}
-
-	</tr>
-	{% endfor %}
-</table>
-
+	</table>
 	{% else %}
 		{% trans 'No householdmembers in this applicant.' %}<br/><br/>
 	{% endif %}
 	{% ifequal user.username applicant.user.username %}
-	<table>
-	<tr>
-	<form action="{% url 'applicants:update' applicant.pk_masked %}">{% csrf_token %}
-	<input class="button" type="submit" value="Edit Householdmembers"/>
-	</form>	
-	</tr>
-	<tr>
-	<form action="{% url 'applicants:update_applicant' applicant.pk_masked %}">{% csrf_token %}
-	<input class="button" type="submit" value="Edit Applicant" />
-	</form>
-	</tr>
-	<tr>
-	<form action="{% url 'applicants:delete' applicant.pk_masked %}">{% csrf_token %}
-	<input class="button delete" type="submit" value="Delete Applicant" />
-	</form>
-	</tr>
-	</table>
+		<table id="edit_household">
+			<tr>
+				<form action="{% url 'applicants:update' applicant.pk_masked %}">{% csrf_token %}
+					<input class="button btn btn" type="submit" value="Edit Householdmembers"/>
+				</form>	
+			</tr>
+			<tr>
+				<form action="{% url 'applicants:update_applicant' applicant.pk_masked %}">{% csrf_token %}
+					<input class="button btn btn" type="submit" value="Edit Applicant" />
+				</form>
+			</tr>
+			<tr>
+				<form action="{% url 'applicants:delete' applicant.pk_masked %}">{% csrf_token %}
+					<input class="button btn btn-danger" type="submit" value="Delete Applicant" />
+				</form>
+			</tr>
+		</table>
 	{% endifequal %}
 {% endblock %}

@@ -5,8 +5,7 @@
 }
 
 #header_holder {
-	height: 100px;
-	margin-bottom:20px;
+	height: 75px;
 	width:100%;
 }
 
@@ -58,11 +57,6 @@
 #header_right {
 	margin-top:30px;
 }
-	
-	header_right ul li a {
-		color: #FFFFFF;
-		text-decoration:none;
-	}
 	
 	#header_right ul li a:hover {
 		color: rgb(68, 68, 68);
@@ -145,3 +139,6 @@
 	width:500px;
 }
 
+#list_submenu {
+	margin-bottom: 25px;
+}
