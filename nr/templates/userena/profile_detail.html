@@ -6,6 +6,33 @@
 {% block content_title %}<h2>{{ profile.user.username }} {% if profile.user.get_full_name %}({{ profile.user.get_full_name }}){% endif %}</h2>{% endblock %}
 
 {% block content %}
+
+<div class="row pull-left">
+  <div class="col-lg-3">
+    <div class="thumbnail">
+      <img src="css/images/profile.jpg" style="width: 300px; height: 200px;">
+      <div class="caption">
+      <h4>Joyce Jamon</h4>
+      <p><small><a href="#" class="btn btn-primary">Edit Profile</a></small></p>
+      </div>
+    </div>
+   </div>
+</div>
+
+<div id="edit_form" class="pull-right">
+  <form>
+    <fieldset>
+      <legend><b>Profile</b></legend>
+      <label><b><small>Name:</small></b></label>
+      <input class="span4" type="text" value="Joyce Jamon">
+      <label><b><small>Username:</small></b></label>
+      <input class="span4" type="text" value="jjamon009">
+      <label><b><small>City:</small></b></label>
+      <input class="span4" type="text" value="Manila, Philippines">
+    </fieldset>
+  </form>
+</div>
+
   <div class="white-box">
     
     <div id="details">
