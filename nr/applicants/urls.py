@@ -7,7 +7,7 @@ from nr.formulas import mask_toggle
 
 
 class ListViewApplicants(ListView):
-	paginate_by = 100
+	paginate_by = 3
 	def get_queryset(self):
 		return Applicant.objects.all()
 	
