@@ -1,0 +1,27 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load humanize %}
+{% load widget_tweaks %}
+
+{% block content_title %}{% trans 'Applicants' %}{% endblock %}
+
+{% block content %}
+{% if applicant_list %}
+{% if is_paginated %}
+	<div class="grid_24">
+  	{% include 'applicants/pagination.html' %}
+    </div>
+{% endif %}
+<table class="package_list">
+	{% include "applicants/applicant_heading_snippet.html" %}
+	{% for applicant in applicant_list %}
+		{% include "applicants/applicant_detail_row_snippet.html" %}
+	{% endfor %}
+</table>
+	{% else %}
+		<p>{% trans 'No applicants.' %}</p>
+	{% endif %}
+
+{% endblock %}
+<!-- of {{ page_obj.paginator.num_pages }}. -->

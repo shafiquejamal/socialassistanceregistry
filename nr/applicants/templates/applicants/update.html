@@ -140,7 +140,7 @@
 	<tr>
 		{% for field in form %}
 			<td>
-			{{ field.errors|add_class:"span4" }}
+			{{ field.errors }}
 			<!-- if the field is a checkbox or a dropdown, then need a different span -->
 				{{ field|add_class:"span2" }}
 			</td>
