@@ -22,7 +22,7 @@
 		<div id="header_holder">
 			<div id="header">
 				<div id="header_left" class="pull-left">
-					<h1 class="pull-left"> Socialassistanceregisrty.com</h1>
+					<h1 class="pull-left"><a href="{% url 'home' %}">Socialassistanceregisrty.com</a></h1>
 					{% block subtitle %}
 						{% if user.is_authenticated %}
 						<span></span>
@@ -52,24 +52,31 @@
 							</li>	
 						</ul>
 					{% else %}
-					<form class="form-inline" method="post" action="{% url 'userena_signin' %}">{% csrf_token %} 
-            {{ form_signin.non_field_errors }}
-            {{ form_signin.identification.errors }}
-            {{ form_signin.identification|add_class:"span2"|attr:"placeholder:Username" }}
-					  <!-- <input type="text" class="span2" placeholder="Username"> -->
-            {{ form_signin.password.errors }}
-            {{ form_signin.password|add_class:"span2"|attr:"placeholder:Password" }}
-					  <!--  <input type="password" class="span2" placeholder="Password"> -->
-					  <button type="submit" class="btn btn-primary">{% trans 'Sign in' %}</button>
-  					<ul class="inline">
-  						<li>
-  							<label class="checkbox">
-  							  <input type="checkbox"><small>{% trans 'Keep me logged in' %}</small>
-  							</label>
-  						</li>
-  						<li><a href=""><small>{% trans 'Forgot your password?' %}</small></a></li>
-  					</ul>
-          </form>
+
+            {% ifnotregex "^/.*/accounts/.*/signup/complete/$" request.path %}
+            {% ifnotregex "^/.*/accounts/.*/disabled/$" request.path %}
+            {% ifnotregex "^/.*/accounts/activate/.*" request.path %}
+    					<form class="form-inline" method="post" action="{% url 'userena_signin' %}">{% csrf_token %} 
+                {{ form_signin.non_field_errors }}
+                {{ form_signin.identification.errors }}
+                {{ form_signin.identification|add_class:"span2"|attr:"placeholder:Username" }}
+    					  <!-- <input type="text" class="span2" placeholder="Username"> -->
+                {{ form_signin.password.errors }}
+                {{ form_signin.password|add_class:"span2"|attr:"placeholder:Password" }}
+    					  <!--  <input type="password" class="span2" placeholder="Password"> -->
+    					  <button type="submit" class="btn btn-primary">{% trans 'Sign in' %}</button>
+      					<ul class="inline">
+      						<li>
+      							<label class="checkbox">
+      							  <input type="checkbox"><small>{% trans 'Keep me logged in' %}</small>
+      							</label>
+      						</li>
+      						<li><a href=""><small>{% trans 'Forgot your password?' %}</small></a></li>
+      					</ul>
+              </form>
+            {% endifnotregex %}
+            {% endifnotregex %}
+            {% endifnotregex %}
 					{% endif %}
 					{% endblock %}
 				</div>
@@ -84,8 +91,8 @@
 			 		<div id="header_nav">
 				    	<ul class="nav">
 				      		<!--li class="active"></li-->
-				      		<li><a href="#"><i class="icon-home"></i> Home</a></li>
-							<li><a href="#"><i class="icon-file"></i> Registry Applications</a></li>
+				      		<li><a href="{% url 'home' %}"><i class="icon-home"></i> Home</a></li>
+							    <li><a href="{% url 'applicants:index' %}"><i class="icon-file"></i> Registry Applications</a></li>
 				    	</ul>
 			    	</div>
 			  	</div>
@@ -98,13 +105,17 @@
 			<div id="main_content">
 		        <div id="list_submenu">
 		          {% ifregex "^/.*/accounts/" request.path %}
-
-		            <a class="btn btn-info" href="{% url 'userena_profile_detail' user.username %}">{% trans "My profile" %}</a>
-		            <a class="btn btn-info" href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit profile" %}</a>
-		            <a class="btn btn-info" href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a>
-		            <a class="btn btn-info" href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a>
-		            <a class="btn btn-info" href="{% url 'userena_profile_list' %}">{% trans "View Profiles" %}</a>
-
+                {% ifnotregex "^/.*/accounts/.*/signup/complete/$" request.path %}
+                {% ifnotregex "^/.*/accounts/.*/disabled/$" request.path %}
+                {% ifnotregex "^/.*/accounts/activate/.*" request.path %}
+  		            <a class="btn btn-info" href="{% url 'userena_profile_detail' user.username %}">{% trans "My profile" %}</a>
+  		            <a class="btn btn-info" href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit profile" %}</a>
+  		            <a class="btn btn-info" href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a>
+  		            <a class="btn btn-info" href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a>
+  		            <a class="btn btn-info" href="{% url 'userena_profile_list' %}">{% trans "View Profiles" %}</a>
+                {% endifnotregex %}
+                {% endifnotregex %}
+                {% endifnotregex %}
 		          {% endifregex %}
 		          {% ifregex "^/.*/applicants/" request.path %}
 		            
