@@ -5,6 +5,8 @@
 {% load widget_tweaks %}
 {% load mathfilters %}
 {% load get_range %}
+{% load ifregextags %}
+{% load get_input_type %}
 
 {% block content_title %}{% trans 'Update or add household members' %}{% endblock %}
 {% block extrahead %}
@@ -33,22 +35,38 @@
 {{ formset_householdmember.management_form }}
 <table class="package_detail">	
 	<tr>
-		
-		<th class="delete">Delete?</th>
+		{% for form in formset_householdmember %}
+			{% ifequal forloop.counter 1 %}
+				{% for field in form.visible_fields %}
+					{% if field|input_type == "CheckboxInput" %}
+						<th class="span1">{{ field.label }}</th>
+					{% else %}
+						<th class="span2">{{ field.label }}</th>
+					{% endif %}
+				{% endfor %}
+			{% endifequal %}
+		{% endfor %}
 	</tr>
 	{% for form in formset_householdmember %}
 	<tr>
 		{% for field in form %}
-			<td>
-			{{ field.errors }}
-			<!-- if the field is a checkbox or a dropdown, then need a different span -->
-				{{ field|add_class:"span2" }}
-			</td>
+			{% if field.is_hidden %}
+				{{ field }}
+			{% else %}
+				<td>
+				{{ field.errors }}
+				<!-- if the field is a checkbox or a dropdown, then need a different span -->
+				{% if field|input_type == "CheckboxInput" %}
+					{{ field|add_class:"span1" }}
+				{% else %}
+					{{ field|add_class:"span2" }}
+				{% endif %}
+				</td>
+			{% endif %}
 		{% endfor %}
 	</tr>
 	{% endfor %}
 </table>
-<p>*{{ formset_householdmember.1.disability.label }}</p>
 <input class="button" type="submit" value="Save" name="saveonly"/>
 <input class="button" type="submit" value="Save and add more" name="saveandaddmore"/>
 </form>
