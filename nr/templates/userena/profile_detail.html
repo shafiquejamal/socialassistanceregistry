@@ -6,57 +6,30 @@
 {% block content_title %}<h2>{{ profile.user.username }} {% if profile.user.get_full_name %}({{ profile.user.get_full_name }}){% endif %}</h2>{% endblock %}
 
 {% block content %}
-
+{% block profile_details %}
+{% block profile_definition_list %}
 <div class="row pull-left">
   <div class="col-lg-3">
     <div class="thumbnail">
-      <img src="css/images/profile.jpg" style="width: 300px; height: 200px;">
-      <div class="caption">
-      <h4>Joyce Jamon</h4>
-      <p><small><a href="#" class="btn btn-primary">Edit Profile</a></small></p>
-      </div>
+      <img src="/css/images/profile.jpg" style="width: 300px; height: 200px;">
     </div>
    </div>
 </div>
-
 <div id="edit_form" class="pull-right">
-  <form>
-    <fieldset>
-      <legend><b>Profile</b></legend>
-      <label><b><small>Name:</small></b></label>
-      <input class="span4" type="text" value="Joyce Jamon">
-      <label><b><small>Username:</small></b></label>
-      <input class="span4" type="text" value="jjamon009">
-      <label><b><small>City:</small></b></label>
-      <input class="span4" type="text" value="Manila, Philippines">
-    </fieldset>
-  </form>
+      <legend><b>{% trans "Profile" %}</b></legend>
+      {% if profile.user.username %}
+        <p><b>{% trans "Username:" %}</b> {{ profile.user.username }}</p>
+      {% endif %}
+      {% if profile.location %}
+        <p><b>{% trans "Location:" %}</b> {{ profile.location }}</p>
+      {% endif %}
+      {% if profile.website %}
+        <p><b>{% trans "Website:" %}</b> {{ profile.website|urlize }}</p>
+      {% endif %}
+       {% if profile.about_me %}
+        <p><b>{% trans "About me:" %}</b> {{ profile.about_me }}</p>
+      {% endif %}
 </div>
-
-  <div class="white-box">
-    
-    <div id="details">
-      {% block profile_details %}
-        <dl>
-          {% block profile_definition_list %}
-            {% if profile.user.username %}
-              <dd>{{ profile.user.username }}</dd>
-            {% endif %}
-            {% if profile.website %}
-              <dt>{% trans "Website" %}</dt>
-              <dd>{{ profile.website|urlize }}</dd>
-            {% endif %}
-            {% if profile.location %}
-              <dt>{% trans "Location" %}</dt>
-              <dd>{{ profile.location }}</dd>
-            {% endif %}
-            {% if profile.about_me %}
-              <dt>{% trans "About me" %}</dt>
-              <dd>{{ profile.about_me }}</dd>
-            {% endif %}
-          {% endblock %}
-        </dl>
-      {% endblock %}
-    </div>
-  </div>
+{% endblock %}
+{% endblock %}
 {% endblock %}

@@ -138,17 +138,10 @@
 	width:300px;
 }
 
-#list_submenu {
-	height:500px;
-}
-
-#list_submenu .table {
-	margin-top:25px;
-}
-
 #edit_form {
 	height:500px;
 	margin-right:100px;
 	margin-top: 20px;
 	width:500px;
 }
+
