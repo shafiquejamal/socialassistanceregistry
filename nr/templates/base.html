@@ -77,18 +77,20 @@
 			<div id="main_content">
         <div id="list_submenu">
           {% ifregex "^/.*/accounts/" request.path %}
-            <li><a href="{% url 'userena_profile_detail' user.username %}">{% trans "My profile" %}</a></li>
-            <li><a href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit profile" %}</a></li>
-            <li><a href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a></li>
-            <li><a href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a></li>
-            <li><a href="{% url 'userena_profile_list' %}">{% trans "View Profiles" %}</a></li>
+
+            <a class="btn btn-info" href="{% url 'userena_profile_detail' user.username %}">{% trans "My profile" %}</a>
+            <a class="btn btn-info" href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit profile" %}</a>
+            <a class="btn btn-info" href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a>
+            <a class="btn btn-info" href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a>
+            <a class="btn btn-info" href="{% url 'userena_profile_list' %}">{% trans "View Profiles" %}</a>
+
           {% endifregex %}
           {% ifregex "^/.*/applicants/" request.path %}
-            <div id="list_applicants">
-              <a class="btn btn-info" href="{% url '' %}"><i class="icon-book icon-white"></i> List of Applicants</a>
-              <a class="btn btn-info" href="{% url '' %}"><i class="icon-plus icon-white"></i> New Applicant</a> 
-              <a class="btn btn-info" href="{% url '' %}"><i class="icon-download-alt icon-white"></i> Download Applicant Data</a>
-            </div>
+            
+            <a class="btn btn-info" href="{% url 'applicants:index' %}"><i class="icon-book icon-white"></i> List of Applicants</a>
+            <a class="btn btn-info" href="{% url 'applicants:create' %}"><i class="icon-plus icon-white"></i> New Applicant</a> 
+            <a class="btn btn-info" href="{% url 'applicants:download_all' %}"><i class="icon-download-alt icon-white"></i> Download Applicant Data</a>
+            
           {% endifregex %}
   				{% block content %}
   				{% endblock %}
