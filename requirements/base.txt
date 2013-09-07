@@ -10,3 +10,7 @@ django-guardian
 PIL
 django-reversion
 django-mathfilters
+django-filter
+markdown
+djangorestframework
+django-widget-tweaks
