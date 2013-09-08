@@ -25,15 +25,22 @@
 	}
 	
 	#header_left h1 {
-		font-size: 36px;
+		font-size: 31px;
 		font-family: calibri;
 		padding: 0px;
 		margin: 0px;
 		color:#555;
 	}
 
+	#header_left h1 a{
+		text-decoration: none;
+	}
+
+	#header_left h4 {
+		color: #555555;
+	}
 #login {
-	margin-top:20px;
+	margin-top:25px;
 }
 	
 	#login form {
@@ -109,6 +116,14 @@
 	width:450px;
 }
 
+#about h4{
+	margin-bottom: 15px;
+}
+
+#registration_form {
+	margin-top: 13px;
+}
+
 #registration_form form {
 	border:1px solid #DDD;
 	border:--webkit-border-radius: 5px;
@@ -123,9 +138,12 @@
 }
 
 #howitworks {
-	height:410px;
-	margin-top:25px;
+	margin-top:3px;
 	width:400px;
+}
+
+#screenshots {
+	margin-top: 25px;
 }
 
 #screenshots td {
@@ -141,4 +159,11 @@
 
 #list_submenu {
 	margin-bottom: 25px;
+}
+
+#video_clip{
+	margin-top: -100px;
+}
+#home{
+	margin-top: 30px;
 }

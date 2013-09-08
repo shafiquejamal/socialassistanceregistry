@@ -8,19 +8,20 @@
 {% block title %}{% trans 'Home' %}{% endblock %}
 
 {% block content %}
-<div id="about" class="pull-left">
-		<h4><p class="text-center">{%trans 'About this Site' %}</p></h4>
+<div id="home">
+	<div id="about" class="pull-left">
+		<h4><p class="text-left">{%trans 'About this Site' %}</p></h4>
 		<ul>
 			<li>
 				<p class="text-left">
 					{% trans 'This website is a demonstration website for the free, open-source Social Assistance Registry project. This registry software is useful for social assistance reform projects, which typically require basic application intake software to support electronic intake of social assistance applications.' %} 
 				</p>
 			</li>
-            <li>
-                <p>
-                    {% trans 'The source code and installation instructions for this site are available <a href="https://github.com/shafiquejamal/socialassistanceregistry">here.</a>' %}
-                </p>
-            </li>
+	        <li>
+	            <p>
+	                {% trans 'The source code and installation instructions for this site are available <a href="https://github.com/shafiquejamal/socialassistanceregistry">here.</a>' %}
+	            </p>
+	        </li>
 			<li>
 				<p class="text-left">
 					{% trans 'Please see the screenshots below and watch the YouTube video below to see how one might use this software.' %}
@@ -32,39 +33,62 @@
 				</p>
 			</li>
 	</div>
-	
-{% if not user.is_authenticated %}
+	{% if not user.is_authenticated %}
 	<div id="registration_form" class="pull-right">
 		<form class="userena" action="{% url 'userena_signup' %}" method="post">{% csrf_token %}
-		  <fieldset>
-  {{ form_signup.non_field_errors }}
-				<legend><b>Sign Up</b></legend>
-				<label><b><small>Type your username</small></b></label>
-  {{ form_signup.username.errors }}
-  {{ form_signup.username|add_class:"span4"|attr:"placeholder:Username" }}
-  <label><b><small>Type your email</small></b></label>
-  {{ form_signup.email.errors }}
-  {{ form_signup.email|add_class:"span4"|attr:"placeholder:Email" }}
-				<label><b><small>Create a password</small></b></label>
+		  	<fieldset>
+  				{{ form_signup.non_field_errors }}
+					<legend><b>Sign Up</b></legend>
+					<label><b><small>Type your username</small></b></label>
+			 	{{ form_signup.username.errors }}
+				{{ form_signup.username|add_class:"span4"|attr:"placeholder:Username" }}
+					<label><b><small>Type your email</small></b></label>
+				{{ form_signup.email.errors }}
+				{{ form_signup.email|add_class:"span4"|attr:"placeholder:Email" }}
+					<label><b><small>Create a password</small></b></label>
 				{{ form_signup.password1.errors }}
-  {{ form_signup.password1|add_class:"span4"|attr:"placeholder:Password" }}
-				<label><b><small>Confirm your password</small></b></label>
+				{{ form_signup.password1|add_class:"span4"|attr:"placeholder:Password" }}
+					<label><b><small>Confirm your password</small></b></label>
 				{{ form_signup.password2.errors }}
-  {{ form_signup.password2|add_class:"span4"|attr:"placeholder:Confirm your password" }}
+				{{ form_signup.password2|add_class:"span4"|attr:"placeholder:Confirm your password" }}
 			</fieldset>
 			 <button type="submit" class="btn btn-info">Sign Up</button>
 		</form>
 	</div>
-{% endif %}
 	<div class="clearfix"></div>
+	{% else %}
+	<div id="howitworks" class="pull-right">
+		<h4><p class="text-center">{% trans 'How it Works' %}</p></h4>
+		<ul>
+			<li>
+				<p class="text-left">{% trans 'This is a demo of a national registry, which could be for social protection or programs.' %}
+				</p>
+			</li>
+			<li>
+				<p class="text-left">{% trans 'This site is implemented in Python using the Django (1.5) framework' %}</p>
+			</li>
+			<li>
+				<p class="text-left">{% trans 'It easily supports multiple languages' %}</p>
+			</li>
+			<li>
+				<p class="text-left">{% trans 'It keeps track of changes to social assistance applications' %}</p>
+			</li>
+			<li>
+				<p>Watch a <a href="http://www.youtube.com/watch?v=cou0e1HkKhI&feature=player_embedded">video</a> demo</p>
+			</li>
+		</ul>
+	</div>
+	<div class="clearfix"></div>
+	{% endif %}
+		
+	{% if not user.is_authenticated %}
 	<div id="video_clip" class="pull-left">
 		<h4>Watch a video demo</h4>
 		<iframe width="480" height="300" src="http://www.youtube.com/embed/cou0e1HkKhI?feature=player_embedded" frameborder="0" allowfullscreen></iframe>
 	</div>
 	
 	<div id="howitworks" class="pull-right">
-		<p class="text-center"><img src="css/images/how.png" /></p>
-		<h4><p class="text-center">{% trans 'How it Works' %}</p></h4>
+		<h4><p class="text-left">{% trans 'How it Works' %}</p></h4>
 		<ul>
 			<li>
 				<p class="text-left">{% trans 'This is a demo of a national registry, which could be for social protection or programs.' %}
@@ -82,7 +106,7 @@
 		</ul>
 	</div>
 	<div class="clearfix"></div>
-	
+	{% endif %}	
 	<div id="screenshots">
 		<table class="table table-bordered">
 			<tr>
@@ -96,8 +120,12 @@
 					<p class="text-center"> {% trans 'Email <a href="">shafique.jamal@gmail.com' %}</a></p>
 				</td>
 				<td>
+					<p class="text-center"><a href=""><img src="css/images/social.png" /></a></p>
+					<h4 class="text-center">{% trans 'Follow & Like us!' %}</h4>
+					<p class="text-center"><a href="">Facebook</a>, <a href="">Twitter</a>, <a href="">Quora</a></p>
 				</td>
 			</tr>
 		</table>
 	</div>
+</div>
 {% endblock %}
