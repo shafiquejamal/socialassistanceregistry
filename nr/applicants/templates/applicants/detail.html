@@ -31,22 +31,22 @@
 		{% trans 'No householdmembers in this applicant.' %}<br/><br/>
 	{% endif %}
 	{% ifequal user.username applicant.user.username %}
-		<table id="edit_household">
-			<tr>
+		<ul class="inline">
+			<li>
 				<form action="{% url 'applicants:update' applicant.pk_masked %}">{% csrf_token %}
-					<input class="button btn btn" type="submit" value="Edit Householdmembers"/>
-				</form>	
-			</tr>
-			<tr>
+				<input class="button btn btn-info" type="submit" value="Edit Householdmembers"/>
+				</form>		
+			</li>
+			<li>
 				<form action="{% url 'applicants:update_applicant' applicant.pk_masked %}">{% csrf_token %}
-					<input class="button btn btn" type="submit" value="Edit Applicant" />
+				<input class="button btn btn-info" type="submit" value="Edit Applicant" />
+				</form>	
+			</li>
+			<li>
+				<form action="{% url 'applicants:delete' applicant.pk_masked %}">{% csrf_token %}	
+				<input class="button btn btn-danger" type="submit" value="Delete Applicant" />
 				</form>
-			</tr>
-			<tr>
-				<form action="{% url 'applicants:delete' applicant.pk_masked %}">{% csrf_token %}
-					<input class="button btn btn-danger" type="submit" value="Delete Applicant" />
-				</form>
-			</tr>
-		</table>
+			</li>
+		</ul>
 	{% endifequal %}
 {% endblock %}

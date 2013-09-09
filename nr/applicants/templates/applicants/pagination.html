@@ -1,29 +1,43 @@
 {% load i18n %}
 {% load url from future %}
 
-<div class="pagination">
-    <span class="page-links">
+<div class="pagination ">
+    <ul class="page-links">
     	{% if page_obj.has_other_pages %}
-            Page:
+           
             {% if page_obj.has_previous %}
-                <a href="/applicants?page={{ page_obj.previous_page_number }}">{% trans 'Prev' %}</a>
+                <li>
+                    <span>
+                        <a href="/applicants?page={{ page_obj.previous_page_number }}">{% trans 'Prev' %}</a>
+                    </span>
+                </li>
             {% else %}
-                {% trans 'Prev' %}
+                <li>
+                    <span>{% trans 'Prev' %}</span>
+                </li>
             {% endif %}
             {% for count in page_obj.paginator.page_range %}
+            <li> 
 				{% ifequal forloop.counter page_obj.number %}
-					<span class="page-current">
+                    <span class="page-current">
 					{{ page_obj.number }}
 					</span>
 				{% else %}
-					<a href="/applicants?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+					<span><a href="/applicants?page={{ forloop.counter }}">{{ forloop.counter }}</a></span>
 				{% endifequal %}
+            </li>
             {% endfor %}
             {% if page_obj.has_next %}
-                <a href="/applicants?page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
+                <li>
+                    <span>
+                        <a href="/applicants?page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
+                    </span>
+                </li>
             {% else %}
-                {% trans 'Next' %}
+                <li>
+                    <span>{% trans 'Next' %}</span>
+                </li>
             {% endif %}
         {% endif %}
-    </span>
+    </ul>
 </div>
