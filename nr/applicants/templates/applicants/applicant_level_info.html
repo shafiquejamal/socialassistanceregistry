@@ -7,14 +7,14 @@
 	{% for k in applicant.get_all_fields|length|div:4|floatformat|add:1|get_range %}
 		<tr>
 			{% for field in applicant.get_all_fields %}
-			{% if forloop.counter >= k|mul:4 and forloop.counter <= k|mul:4|add:3 %}
+			{% if forloop.counter0 >= k|mul:4 and forloop.counter <= k|mul:4|add:3 %}
 				<th>{{ field.label }}</th>
 			{% endif %}
 			{% endfor %}
 		</tr>
 		<tr>
 			{% for field in applicant.get_all_fields %}
-			{% if forloop.counter >= k|mul:4 and forloop.counter <= k|mul:4|add:3 %}
+			{% if forloop.counter0 >= k|mul:4 and forloop.counter <= k|mul:4|add:3 %}
 				<td>{{ field.value }}</td>
 			{% endif %}
 			{% endfor %}
