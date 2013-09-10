@@ -108,11 +108,15 @@
                 {% ifnotregex "^/.*/accounts/.*/signup/complete/$" request.path %}
                 {% ifnotregex "^/.*/accounts/.*/disabled/$" request.path %}
                 {% ifnotregex "^/.*/accounts/activate/.*" request.path %}
+                {% ifnotregex "^/.*/accounts/signin/.*" request.path %}
+                {% ifnotregex "^/.*/accounts/signout/.*" request.path %}
   		            <a class="btn btn-info" href="{% url 'userena_profile_detail' user.username %}">{% trans "My profile" %}</a>
   		            <a class="btn btn-info" href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit profile" %}</a>
   		            <a class="btn btn-info" href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a>
   		            <a class="btn btn-info" href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a>
   		            <a class="btn btn-info" href="{% url 'userena_profile_list' %}">{% trans "View Profiles" %}</a>
+                {% endifnotregex %}
+                {% endifnotregex %}
                 {% endifnotregex %}
                 {% endifnotregex %}
                 {% endifnotregex %}
