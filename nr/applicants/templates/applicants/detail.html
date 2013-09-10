@@ -13,13 +13,12 @@
 
 <h2>Household members</h2>
 {% if applicant.householdmember_set.all %}
-	<table class="table table-bordered table-striped info">
+	<table class="table table-bordered table-striped">
 		<tr>
 			{% include "applicants/householdmember_heading_snippet.html" %}
 		</tr>
 		{% for householdmember in applicant.householdmember_set.all %}
-		<tr>
-			
+		<tr>	
 			{% for field in householdmember.get_all_fields %}
 				<td>{{ field.value }}</td>
 			{% endfor %}

@@ -33,7 +33,7 @@
 <h2>Household Members</h2>
 <form class="package_detail" action="{% url 'applicants:update' pk_masked %}" method="post" {% if form.is_multipart %}enctype="multipart/form-data"{% endif %}>{% csrf_token %}
 {{ formset_householdmember.management_form }}
-<table class="package_detail">	
+<table class="table table-bordered table-striped">
 	<tr>
 		{% for form in formset_householdmember %}
 			{% ifequal forloop.counter 1 %}
@@ -41,7 +41,7 @@
 					{% if field|input_type == "CheckboxInput" %}
 						<th class="span1">{{ field.label }}</th>
 					{% else %}
-						<th class="span2">{{ field.label }}</th>
+						<th class="span1">{{ field.label }}</th>
 					{% endif %}
 				{% endfor %}
 			{% endifequal %}
@@ -59,7 +59,7 @@
 				{% if field|input_type == "CheckboxInput" %}
 					{{ field|add_class:"span1" }}
 				{% else %}
-					{{ field|add_class:"span2" }}
+					{{ field|add_class:"span1" }}
 				{% endif %}
 				</td>
 			{% endif %}
@@ -67,7 +67,7 @@
 	</tr>
 	{% endfor %}
 </table>
-<input class="button" type="submit" value="Save" name="saveonly"/>
-<input class="button" type="submit" value="Save and add more" name="saveandaddmore"/>
+<input class="btn btn-info" type="submit" value="Save" name="saveonly"/>
+<input class="btn btn-info" type="submit" value="Save and add more" name="saveandaddmore"/>
 </form>
 {% endblock %}
